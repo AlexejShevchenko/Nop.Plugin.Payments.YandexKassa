@@ -1,0 +1,266 @@
+﻿@{
+    Layout = "";
+}
+@model Nop.Plugin.Payments.YandexKassa.Models.ConfigurationModel
+@using Nop.Web.Framework;
+@using Nop.Plugin.Payments.YandexKassa;
+@Html.Action("StoreScopeConfiguration", "Setting", new { area = "Admin" })
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12 col-md-8">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <h4>@T("Plugins.Payments.YandexKassa.YaParameters")</h4>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <div class="label-wrapper">
+                                    <label class="control-label">checkUrl/avisoUrl</label>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-9">
+                                @{
+                                    string callback = @ViewBag.Host + "YandexKassa/CallBack";
+                                }
+                                <input type="text" disabled class="form-control text-box single-line" value="@callback" />
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <h4>@T("Plugins.Payments.YandexKassa.YaPaymentSettings")</h4>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.OverrideStoreCheckboxFor(model => model.IsDemo_OverrideForStore, model => model.IsDemo, Model.ActiveStoreScopeConfiguration)
+                                @Html.NopLabelFor(model => model.IsDemo)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.IsDemo)
+                                @Html.ValidationMessageFor(model => model.IsDemo)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.OverrideStoreCheckboxFor(model => model.ShopId_OverrideForStore, model => model.ShopId, Model.ActiveStoreScopeConfiguration)
+                                @Html.NopLabelFor(model => model.ShopId)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.ShopId)
+                                @Html.ValidationMessageFor(model => model.ShopId)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.OverrideStoreCheckboxFor(model => model.Scid_OverrideForStore, model => model.Scid, Model.ActiveStoreScopeConfiguration)
+                                @Html.NopLabelFor(model => model.Scid)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.Scid)
+                                @Html.ValidationMessageFor(model => model.Scid)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.OverrideStoreCheckboxFor(model => model.ShopPassword_OverrideForStore, model => model.ShopPassword, Model.ActiveStoreScopeConfiguration)
+                                @Html.NopLabelFor(model => model.ShopPassword)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.ShopPassword)
+                                @Html.ValidationMessageFor(model => model.ShopPassword)
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <h4>@T("Plugins.Payments.YandexKassa.YaPaymentScenario")</h4>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.OverrideStoreCheckboxFor(model => model.YandexPaymentSide_OverrideForStore, model => model.YandexPaymentSide, Model.ActiveStoreScopeConfiguration)
+                            <div class="col-md-9 col-md-offset-3">
+                                <div class="radio">
+                                    <label>
+                                        @Html.RadioButton("YandexPaymentSide", YandexPaymentSide.SHOP_SIDE, Model.YandexPaymentSide == YandexPaymentSide.SHOP_SIDE)
+                                        @T("Plugins.Payments.YandexKassa.ShopSide")
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-md-offset-3">
+                                <div class="radio">
+                                    <label>
+                                        @Html.RadioButton("YandexPaymentSide", YandexPaymentSide.YANDEX_SIDE, Model.YandexPaymentSide == YandexPaymentSide.YANDEX_SIDE)
+                                        @T("Plugins.Payments.YandexKassa.YandexSide")
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <h4>@T("Plugins.Payments.YandexKassa.PaymentType")</h4>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                @Html.OverrideStoreCheckboxFor(model => model.PC_OverrideForStore, model => model.PC, Model.ActiveStoreScopeConfiguration)
+                                @Html.NopLabelFor(model => model.PC)
+                            </div>
+                            <div class="col-md-4">
+                                @Html.NopEditorFor(model => model.PC)
+                                @Html.ValidationMessageFor(model => model.PC)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                @Html.OverrideStoreCheckboxFor(model => model.AC_OverrideForStore, model => model.AC, Model.ActiveStoreScopeConfiguration)
+                                @Html.NopLabelFor(model => model.AC)
+                            </div>
+                            <div class="col-md-4">
+                                @Html.NopEditorFor(model => model.AC)
+                                @Html.ValidationMessageFor(model => model.AC)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                @Html.OverrideStoreCheckboxFor(model => model.MC_OverrideForStore, model => model.MC, Model.ActiveStoreScopeConfiguration)
+                                @Html.NopLabelFor(model => model.MC)
+                            </div>
+                            <div class="col-md-4">
+                                @Html.NopEditorFor(model => model.MC)
+                                @Html.ValidationMessageFor(model => model.MC)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                @Html.OverrideStoreCheckboxFor(model => model.GP_OverrideForStore, model => model.GP, Model.ActiveStoreScopeConfiguration)
+                                @Html.NopLabelFor(model => model.GP)
+                            </div>
+                            <div class="col-md-4">
+                                @Html.NopEditorFor(model => model.GP)
+                                @Html.ValidationMessageFor(model => model.GP)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                @Html.OverrideStoreCheckboxFor(model => model.EP_OverrideForStore, model => model.EP, Model.ActiveStoreScopeConfiguration)
+                                @Html.NopLabelFor(model => model.EP)
+                            </div>
+                            <div class="col-md-4">
+                                @Html.NopEditorFor(model => model.EP)
+                                @Html.ValidationMessageFor(model => model.EP)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                @Html.OverrideStoreCheckboxFor(model => model.WM_OverrideForStore, model => model.WM, Model.ActiveStoreScopeConfiguration)
+                                @Html.NopLabelFor(model => model.WM)
+                            </div>
+                            <div class="col-md-4">
+                                @Html.NopEditorFor(model => model.WM)
+                                @Html.ValidationMessageFor(model => model.WM)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                @Html.OverrideStoreCheckboxFor(model => model.SB_OverrideForStore, model => model.SB, Model.ActiveStoreScopeConfiguration)
+                                @Html.NopLabelFor(model => model.SB)
+                            </div>
+                            <div class="col-md-4">
+                                @Html.NopEditorFor(model => model.SB)
+                                @Html.ValidationMessageFor(model => model.SB)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                @Html.OverrideStoreCheckboxFor(model => model.MP_OverrideForStore, model => model.MP, Model.ActiveStoreScopeConfiguration)
+                                @Html.NopLabelFor(model => model.MP)
+                            </div>
+                            <div class="col-md-4">
+                                @Html.NopEditorFor(model => model.MP)
+                                @Html.ValidationMessageFor(model => model.MP)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                @Html.OverrideStoreCheckboxFor(model => model.AB_OverrideForStore, model => model.AB, Model.ActiveStoreScopeConfiguration)
+                                @Html.NopLabelFor(model => model.AB)
+                            </div>
+                            <div class="col-md-4">
+                                @Html.NopEditorFor(model => model.AB)
+                                @Html.ValidationMessageFor(model => model.AB)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                @Html.OverrideStoreCheckboxFor(model => model.MA_OverrideForStore, model => model.MA, Model.ActiveStoreScopeConfiguration)
+                                @Html.NopLabelFor(model => model.MA)
+                            </div>
+                            <div class="col-md-4">
+                                @Html.NopEditorFor(model => model.MA)
+                                @Html.ValidationMessageFor(model => model.MA)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                @Html.OverrideStoreCheckboxFor(model => model.PB_OverrideForStore, model => model.PB, Model.ActiveStoreScopeConfiguration)
+                                @Html.NopLabelFor(model => model.PB)
+                            </div>
+                            <div class="col-md-4">
+                                @Html.NopEditorFor(model => model.PB)
+                                @Html.ValidationMessageFor(model => model.PB)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                @Html.OverrideStoreCheckboxFor(model => model.QW_OverrideForStore, model => model.QW, Model.ActiveStoreScopeConfiguration)
+                                @Html.NopLabelFor(model => model.QW)
+                            </div>
+                            <div class="col-md-4">
+                                @Html.NopEditorFor(model => model.QW)
+                                @Html.ValidationMessageFor(model => model.QW)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                @Html.OverrideStoreCheckboxFor(model => model.KV_OverrideForStore, model => model.KV, Model.ActiveStoreScopeConfiguration)
+                                @Html.NopLabelFor(model => model.KV)
+                            </div>
+                            <div class="col-md-4">
+                                @Html.NopEditorFor(model => model.KV)
+                                @Html.ValidationMessageFor(model => model.KV)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input type="submit" name="save" class="btn bg-blue" value="@T(" Admin.Common.Save")" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                                    }

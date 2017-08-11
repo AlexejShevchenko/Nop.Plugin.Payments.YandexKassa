@@ -1,0 +1,142 @@
+﻿@using Nop.Web.Framework.UI
+@{
+    Layout = "";
+    Html.AddScriptParts(ResourceLocation.Foot, "~/Plugins/Payments.YandexKassa/Content/jquery.matchHeight-min.js");
+    Html.AddCssFileParts(ResourceLocation.Head, "~/Plugins/Payments.YandexKassa/Content/styles.css");
+}
+@model Nop.Plugin.Payments.YandexKassa.YandexKassaPaymentSettings
+@using Nop.Web.Framework;
+<div class="row">
+    @if (Model.PC)
+    {
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 payment_type" data-type="PC">
+            <div class="bg"></div>
+            <img src="/Plugins/Payments.YandexKassa/Content/Images/PC.png" />
+        </div>
+
+    }
+    @if (Model.AC)
+    {
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 payment_type" data-type="AC">
+            <div class="bg"></div>
+            <img src="/Plugins/Payments.YandexKassa/Content/Images/AC.png" />
+        </div>
+    }
+    @if (Model.SB)
+    {
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 payment_type" data-type="SB">
+            <div class="bg"></div>
+            <img src="/Plugins/Payments.YandexKassa/Content/Images/SB.png" />
+        </div>
+    }
+    @if (Model.MC)
+    {
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 payment_type" data-type="MC">
+            <div class="bg"></div>
+            <img src="/Plugins/Payments.YandexKassa/Content/Images/MC.png" />
+        </div>
+    }
+    @if (Model.WM)
+    {
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 payment_type" data-type="WM">
+            <div class="bg"></div>
+            <img src="/Plugins/Payments.YandexKassa/Content/Images/WM.png" />
+        </div>
+    }
+    @if (Model.GP)
+    {
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 payment_type" data-type="GP">
+            <div class="bg"></div>
+            <img src="/Plugins/Payments.YandexKassa/Content/Images/GP.png" />
+        </div>
+    }
+    @if (Model.MP)
+    {
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 payment_type" data-type="MP">
+            <div class="bg"></div>
+            <img src="/Plugins/Payments.YandexKassa/Content/Images/MP.png" />
+        </div>
+    }
+    @if (Model.AB)
+    {
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 payment_type" data-type="AB">
+            <div class="bg"></div>
+            <img src="/Plugins/Payments.YandexKassa/Content/Images/AB.png" />
+        </div>
+    }
+    @if (Model.MA)
+    {
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 payment_type" data-type="MA">
+            <div class="bg"></div>
+            <img src="/Plugins/Payments.YandexKassa/Content/Images/MA.png" />
+        </div>
+    }
+    @if (Model.PB)
+    {
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 payment_type" data-type="PB">
+            <div class="bg"></div>
+            <img src="/Plugins/Payments.YandexKassa/Content/Images/PB.png" />
+        </div>
+    }
+    @if (Model.QW)
+    {
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 payment_type" data-type="QW">
+            <div class="bg"></div>
+            <img src="/Plugins/Payments.YandexKassa/Content/Images/QW.png" />
+        </div>
+    }
+    @if (Model.KV)
+    {
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 payment_type" data-type="KV">
+            <div class="bg"></div>
+            <img src="/Plugins/Payments.YandexKassa/Content/Images/KV.png" />
+        </div>
+    }
+    @if (Model.EP)
+    {
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 payment_type" data-type="EP">
+            <div class="bg"></div>
+            <img src="/Plugins/Payments.YandexKassa/Content/Images/EP.png" />
+        </div>
+    }
+</div>
+
+<script>
+    function setCookie(name, value, options) {
+        options = options || {};
+
+        var expires = options.expires;
+
+        if (typeof expires == "number" && expires) {
+            var d = new Date();
+            d.setTime(d.getTime() + expires * 1000);
+            expires = options.expires = d;
+        }
+        if (expires && expires.toUTCString) {
+            options.expires = expires.toUTCString();
+        }
+
+        value = encodeURIComponent(value);
+
+        var updatedCookie = name + "=" + value;
+
+        for (var propName in options) {
+            updatedCookie += "; " + propName;
+            var propValue = options[propName];
+            if (propValue !== true) {
+                updatedCookie += "=" + propValue;
+            }
+        }
+
+        document.cookie = updatedCookie;
+    }
+
+    $('.payment_type').click(function () {
+        $('.payment_type.active').removeClass('active');
+        $(this).addClass('active');
+        setCookie('yandex_payment_type', $(this).attr('data-type'));
+    });
+    $(document).ready(function () {
+        $('.payment_type').matchHeight();
+    });
+</script>
